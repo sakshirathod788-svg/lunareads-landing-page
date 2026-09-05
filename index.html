@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>LunaReads — Some stories are meant to be read after dark</title>
+<meta name="description" content="LunaReads is a bookstore for people who read past midnight. Discover mystery, romance, fantasy and thriller titles chosen for the hours after sunset." />
+
+<!-- Playfair Display + Cormorant Garamond for display type, Manrope for body copy -->
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link
+  href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,500;1,600&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,500&family=Manrope:wght@400;500;600;700&display=swap"
+  rel="stylesheet"
+/>
+
+<link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+<a class="skip-link" href="#main">Skip to main content</a>
+
+<!-- ============================== NAVBAR ============================== -->
+<header class="site-header" id="siteHeader">
+  <div class="header-inner">
+    <a href="#top" class="logo">
+      <svg class="logo-mark" viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M16 3a9 9 0 1 0 5.6 16.1A10.5 10.5 0 0 1 16 3Z" fill="currentColor"/>
+      </svg>
+      <span>LunaReads</span>
+    </a>
+
+    <nav class="primary-nav" id="primaryNav" aria-label="Primary">
+      <ul>
+        <li><a href="#top" class="nav-link">Home</a></li>
+        <li><a href="#mood" class="nav-link">Discover</a></li>
+        <li><a href="#featured-books" class="nav-link">Collections</a></li>
+        <li><a href="#editorial" class="nav-link">About</a></li>
+      </ul>
+    </nav>
+
+    <div class="header-actions">
+      <button class="icon-btn" id="searchToggle" type="button" aria-haspopup="dialog" aria-controls="searchOverlay" aria-label="Search books">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5" stroke="currentColor" stroke-width="1.6" fill="none"/><path d="M15.5 15.5L21 21" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+      </button>
+
+      <button class="icon-btn wishlist-btn" id="wishlistIndicator" type="button" aria-label="Wishlist, 0 books saved" disabled>
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20s-7.2-4.4-9.6-9.1C.9 7.6 2.4 4.4 5.6 3.6c1.9-.5 3.9.2 5 1.8l1.4 2 1.4-2c1.1-1.6 3.1-2.3 5-1.8 3.2.8 4.7 4 3.2 7.3C19.2 15.6 12 20 12 20Z" stroke="currentColor" stroke-width="1.5" fill="none"/></svg>
+        <span class="wishlist-count" id="wishlistCount">0</span>
+      </button>
+
+      <a href="#featured-books" class="btn btn-outline nav-cta">Explore</a>
+
+      <button
+        class="menu-toggle"
+        id="menuToggle"
+        type="button"
+        aria-expanded="false"
+        aria-controls="primaryNav"
+        aria-label="Open menu"
+      >
+        <span class="menu-toggle-bar"></span>
+        <span class="menu-toggle-bar"></span>
+        <span class="menu-toggle-bar"></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<div class="nav-backdrop" id="navBackdrop"></div>
+
+<main id="main">
+
+  <!-- ============================== HERO ============================== -->
+  <section class="hero" id="top">
+    <!-- Real photo now supplies the "cinematic library" backdrop (see .hero
+         background-image in styles.css); the grain layer sits on top of it
+         for a consistent film-like texture across every section. -->
+    <div class="hero-grain" aria-hidden="true"></div>
+
+    <div class="hero-content">
+      <p class="hero-kicker">A bookstore for people who read past midnight</p>
+      <h1 class="hero-title">Some stories are meant<br /><em>to be read after dark.</em></h1>
+      <p class="hero-sub">Four hundred titles, one rule: every book on our shelves has to earn the hour you'll lose sleep over it.</p>
+      <div class="hero-actions">
+        <a href="#featured-books" class="btn btn-primary">Explore Books</a>
+        <button class="btn btn-ghost" id="tonightsReadBtn" type="button">Discover Tonight's Read</button>
+      </div>
+    </div>
+
+    <div class="scroll-cue" aria-hidden="true">
+      <span></span>
+    </div>
+  </section>
+
+  <!-- ============================== FEATURED BOOKS ============================== -->
+  <section class="featured" id="featured-books">
+    <div class="section-inner">
+      <div class="section-head reveal">
+        <p class="section-kicker">Handpicked</p>
+        <h2>Featured tonight</h2>
+      </div>
+
+      <div class="filter-pill-row" id="filterPillRow" hidden>
+        <span class="filter-pill">
+          Showing: <strong id="filterPillLabel"></strong>
+          <button type="button" id="clearFilterBtn" aria-label="Clear filter">&times;</button>
+        </span>
+      </div>
+
+      <div class="book-grid" id="bookGrid">
+
+        <article class="book-card reveal" data-genre="mystery" data-title="The Silent Patient" data-author="Alex Michaelides" data-book-id="silent-patient">
+          <div class="book-cover cover-mystery">
+            <span class="cover-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 3v3M12 18v3M4.2 4.2l2.1 2.1M17.7 17.7l2.1 2.1M3 12h3M18 12h3M4.2 19.8l2.1-2.1M17.7 6.3l2.1-2.1" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/><circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.2" fill="none"/></svg></span>
+            <p class="cover-title">The Silent Patient</p>
+            <p class="cover-author">Alex Michaelides</p>
+          </div>
+          <div class="book-meta">
+            <div class="book-meta-top">
+              <div>
+                <h3 class="book-title">The Silent Patient</h3>
+                <p class="book-author">Alex Michaelides</p>
+              </div>
+              <button class="wishlist-toggle" type="button" aria-pressed="false" aria-label="Add The Silent Patient to wishlist">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20s-7.2-4.4-9.6-9.1C.9 7.6 2.4 4.4 5.6 3.6c1.9-.5 3.9.2 5 1.8l1.4 2 1.4-2c1.1-1.6 3.1-2.3 5-1.8 3.2.8 4.7 4 3.2 7.3C19.2 15.6 12 20 12 20Z" stroke="currentColor" stroke-width="1.5" fill="none"/></svg>
+              </button>
+            </div>
+            <div class="book-rating" aria-label="Rating: 4.5 out of 5">
+              <span class="stars" style="--rating: 4.5"></span>
+              <span class="rating-number">4.5</span>
+            </div>
+            <div class="book-meta-bottom">
+              <span class="book-price">$16.99</span>
+              <button class="btn-quicklook" type="button" data-open-modal="silent-patient">Quick look</button>
+            </div>
+          </div>
+        </article>
+
+        <article class="book-card reveal" data-genre="romance" data-title="The Song of Achilles" data-author="Madeline Miller" data-book-id="song-of-achilles">
+          <div class="book-cover cover-romance">
+            <span class="cover-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 20s-7.2-4.4-9.6-9.1C.9 7.6 2.4 4.4 5.6 3.6c1.9-.5 3.9.2 5 1.8l1.4 2 1.4-2c1.1-1.6 3.1-2.3 5-1.8 3.2.8 4.7 4 3.2 7.3C19.2 15.6 12 20 12 20Z" stroke="currentColor" stroke-width="1.2" fill="none"/></svg></span>
+            <p class="cover-title">The Song of Achilles</p>
+            <p class="cover-author">Madeline Miller</p>
+          </div>
+          <div class="book-meta">
+            <div class="book-meta-top">
+              <div>
+                <h3 class="book-title">The Song of Achilles</h3>
+                <p class="book-author">Madeline Miller</p>
+              </div>
+              <button class="wishlist-toggle" type="button" aria-pressed="false" aria-label="Add The Song of Achilles to wishlist">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20s-7.2-4.4-9.6-9.1C.9 7.6 2.4 4.4 5.6 3.6c1.9-.5 3.9.2 5 1.8l1.4 2 1.4-2c1.1-1.6 3.1-2.3 5-1.8 3.2.8 4.7 4 3.2 7.3C19.2 15.6 12 20 12 20Z" stroke="currentColor" stroke-width="1.5" fill="none"/></svg>
+              </button>
+            </div>
+            <div class="book-rating" aria-label="Rating: 4.7 out of 5">
+              <span class="stars" style="--rating: 4.7"></span>
+              <span class="rating-number">4.7</span>
+            </div>
+            <div class="book-meta-bottom">
+              <span class="book-price">$18.50</span>
+              <button class="btn-quicklook" type="button" data-open-modal="song-of-achilles">Quick look</button>
+            </div>
+          </div>
+        </article>
+
+        <article class="book-card reveal" data-genre="fantasy" data-title="The Night Circus" data-author="Erin Morgenstern" data-book-id="night-circus">
+          <div class="book-cover cover-fantasy">
+            <span class="cover-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5" stroke="currentColor" stroke-width="1.2" fill="none"/><path d="M12 3.5v2M12 18.5v2M3.5 12h2M18.5 12h2" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/><path d="M12 8l1.8 3.2L17 13l-3.2 1.8L12 18l-1.8-3.2L7 13l3.2-1.8Z" stroke="currentColor" stroke-width="1.1" fill="none"/></svg></span>
+            <p class="cover-title">The Night Circus</p>
+            <p class="cover-author">Erin Morgenstern</p>
+          </div>
+          <div class="book-meta">
+            <div class="book-meta-top">
+              <div>
+                <h3 class="book-title">The Night Circus</h3>
+                <p class="book-author">Erin Morgenstern</p>
+              </div>
+              <button class="wishlist-toggle" type="button" aria-pressed="false" aria-label="Add The Night Circus to wishlist">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20s-7.2-4.4-9.6-9.1C.9 7.6 2.4 4.4 5.6 3.6c1.9-.5 3.9.2 5 1.8l1.4 2 1.4-2c1.1-1.6 3.1-2.3 5-1.8 3.2.8 4.7 4 3.2 7.3C19.2 15.6 12 20 12 20Z" stroke="currentColor" stroke-width="1.5" fill="none"/></svg>
+              </button>
+            </div>
+            <div class="book-rating" aria-label="Rating: 4.5 out of 5">
+              <span class="stars" style="--rating: 4.5"></span>
+              <span class="rating-number">4.5</span>
+            </div>
+            <div class="book-meta-bottom">
+              <span class="book-price">$17.00</span>
+              <button class="btn-quicklook" type="button" data-open-modal="night-circus">Quick look</button>
+            </div>
+          </div>
+        </article>
+
+        <article class="book-card reveal" data-genre="thriller" data-title="Gone Girl" data-author="Gillian Flynn" data-book-id="gone-girl">
+          <div class="book-cover cover-thriller">
+            <span class="cover-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5" stroke="currentColor" stroke-width="1.2" fill="none"/><path d="M12 7.5V12l3 2" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg></span>
+            <p class="cover-title">Gone Girl</p>
+            <p class="cover-author">Gillian Flynn</p>
+          </div>
+          <div class="book-meta">
+            <div class="book-meta-top">
+              <div>
+                <h3 class="book-title">Gone Girl</h3>
+                <p class="book-author">Gillian Flynn</p>
+              </div>
+              <button class="wishlist-toggle" type="button" aria-pressed="false" aria-label="Add Gone Girl to wishlist">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20s-7.2-4.4-9.6-9.1C.9 7.6 2.4 4.4 5.6 3.6c1.9-.5 3.9.2 5 1.8l1.4 2 1.4-2c1.1-1.6 3.1-2.3 5-1.8 3.2.8 4.7 4 3.2 7.3C19.2 15.6 12 20 12 20Z" stroke="currentColor" stroke-width="1.5" fill="none"/></svg>
+              </button>
+            </div>
+            <div class="book-rating" aria-label="Rating: 4.3 out of 5">
+              <span class="stars" style="--rating: 4.3"></span>
+              <span class="rating-number">4.3</span>
+            </div>
+            <div class="book-meta-bottom">
+              <span class="book-price">$15.99</span>
+              <button class="btn-quicklook" type="button" data-open-modal="gone-girl">Quick look</button>
+            </div>
+          </div>
+        </article>
+
+      </div>
+
+      <p class="no-results" id="noResults" hidden>No stories found. Try a different title or author.</p>
+    </div>
+  </section>
+
+  <!-- ============================== EXPLORE BY MOOD ============================== -->
+  <section class="mood" id="mood">
+    <div class="section-inner">
+      <div class="section-head reveal">
+        <p class="section-kicker">Choose your hour</p>
+        <h2>Explore by mood</h2>
+      </div>
+
+      <div class="mood-grid">
+        <button class="mood-card reveal mood-mystery" type="button" data-mood-filter="mystery">
+          <span class="mood-name">Mystery</span>
+          <span class="mood-desc">Locked rooms, longer nights</span>
+        </button>
+        <button class="mood-card reveal mood-romance" type="button" data-mood-filter="romance">
+          <span class="mood-name">Romance</span>
+          <span class="mood-desc">Slow burns, second chances</span>
+        </button>
+        <button class="mood-card reveal mood-fantasy" type="button" data-mood-filter="fantasy">
+          <span class="mood-name">Fantasy</span>
+          <span class="mood-desc">Worlds that outlast the reading lamp</span>
+        </button>
+        <button class="mood-card reveal mood-thriller" type="button" data-mood-filter="thriller">
+          <span class="mood-name">Thriller</span>
+          <span class="mood-desc">One more chapter, you promise</span>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================== EDITORIAL ============================== -->
+  <section class="editorial" id="editorial">
+    <div class="editorial-grain" aria-hidden="true"></div>
+    <div class="editorial-content reveal">
+      <p class="section-kicker light">Our story</p>
+      <h2>Stories worth<br />staying up for.</h2>
+      <p class="editorial-text">
+        LunaReads opens when the rest of the city starts to quiet down. We keep one shelf
+        of new arrivals and let everything else earn its place slowly — by word of mouth,
+        by the readers who come back at 11pm asking "what else do you have like that one."
+      </p>
+    </div>
+  </section>
+
+  <!-- ============================== TESTIMONIALS ============================== -->
+  <section class="testimonials" id="testimonials">
+    <div class="section-inner">
+      <div class="section-head reveal centered">
+        <p class="section-kicker">From our readers</p>
+        <h2>Told in their own words</h2>
+      </div>
+
+      <div class="testimonial-grid">
+        <figure class="testimonial reveal">
+          <blockquote>I read the last third by lamplight because I couldn't bear to turn on the overhead light. That's the whole review.</blockquote>
+          <figcaption>Naomi R. <span>&middot; verified reader</span></figcaption>
+        </figure>
+        <figure class="testimonial reveal">
+          <blockquote>LunaReads recommended <cite>Gone Girl</cite> at 11pm and I finished it by 3am. I regret nothing.</blockquote>
+          <figcaption>Owen T. <span>&middot; verified reader</span></figcaption>
+        </figure>
+        <figure class="testimonial reveal">
+          <blockquote>The kind of store where you go in for one book and leave having planned your whole month of reading.</blockquote>
+          <figcaption>Priya M. <span>&middot; verified reader</span></figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================== FINAL CTA ============================== -->
+  <section class="final-cta">
+    <div class="final-cta-inner reveal">
+      <h2>Your next story is waiting in the dark.</h2>
+      <p>New titles arrive quietly, without a countdown or a launch date. Come back after sunset.</p>
+      <a href="#featured-books" class="btn btn-primary">Explore the Collection</a>
+    </div>
+  </section>
+
+</main>
+
+<!-- ============================== FOOTER ============================== -->
+<footer class="site-footer" id="footer">
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <a href="#top" class="logo">
+        <svg class="logo-mark" viewBox="0 0 24 24" aria-hidden="true"><path d="M16 3a9 9 0 1 0 5.6 16.1A10.5 10.5 0 0 1 16 3Z" fill="currentColor"/></svg>
+        <span>LunaReads</span>
+      </a>
+      <p class="footer-tagline">A bookstore for people who read past midnight.<br />Est. 2026.</p>
+    </div>
+
+    <nav class="footer-nav" aria-label="Footer">
+      <div class="footer-col">
+        <p class="footer-col-title">Discover</p>
+        <a href="#mood" data-mood-filter="mystery">Mystery</a>
+        <a href="#mood" data-mood-filter="romance">Romance</a>
+        <a href="#mood" data-mood-filter="fantasy">Fantasy</a>
+        <a href="#mood" data-mood-filter="thriller">Thriller</a>
+      </div>
+      <div class="footer-col">
+        <p class="footer-col-title">Collections</p>
+        <a href="#featured-books">Featured tonight</a>
+        <a href="#editorial">Our story</a>
+        <a href="#testimonials">Reviews</a>
+      </div>
+      <div class="footer-col">
+        <p class="footer-col-title">Follow</p>
+        <div class="social-row">
+          <a href="#" aria-label="LunaReads on Instagram" class="social-icon">
+            <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5" stroke="currentColor" stroke-width="1.4" fill="none"/><circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.4" fill="none"/><circle cx="17.2" cy="6.8" r="1" fill="currentColor"/></svg>
+          </a>
+          <a href="#" aria-label="LunaReads on Pinterest" class="social-icon">
+            <svg viewBox="0 0 24 24"><path d="M12 3a9 9 0 0 0-3.3 17.4c0-.7 0-1.6.2-2.4l1.3-5.6s-.3-.7-.3-1.6c0-1.5.9-2.6 1.9-2.6.9 0 1.4.7 1.4 1.5 0 .9-.6 2.3-.9 3.6-.3 1.1.5 2 1.6 2 1.9 0 3.2-2.4 3.2-5.3 0-2.2-1.5-3.8-4.2-3.8-3 0-4.9 2.2-4.9 4.7 0 .9.3 1.5.7 2 .2.2.2.3.1.5l-.2.9c-.1.3-.3.4-.6.2-1.2-.5-1.7-1.8-1.7-3.3 0-2.5 2.1-5.5 6.3-5.5 3.4 0 5.6 2.4 5.6 5 0 3.4-1.9 6-4.6 6-.9 0-1.8-.5-2.1-1.1l-.6 2.3c-.2.8-.6 1.7-1 2.3A9 9 0 1 0 12 3Z" fill="currentColor"/></svg>
+          </a>
+          <a href="#" aria-label="LunaReads on X" class="social-icon">
+            <svg viewBox="0 0 24 24"><path d="M4 4l16 16M20 4L4 20" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+          </a>
+        </div>
+      </div>
+    </nav>
+  </div>
+
+  <div class="footer-bottom">
+    <p>&copy; <span id="year"></span> LunaReads. A frontend design exercise — no purchases are processed on this page.</p>
+  </div>
+</footer>
+
+<!-- ============================== SEARCH OVERLAY ============================== -->
+<div class="search-overlay" id="searchOverlay" role="dialog" aria-modal="true" aria-label="Search books" hidden>
+  <div class="search-overlay-inner">
+    <button class="search-close" id="searchClose" type="button" aria-label="Close search">&times;</button>
+    <p class="search-label">Search by title or author</p>
+    <input type="text" id="searchInput" class="search-input" placeholder="Try &ldquo;circus&rdquo; or &ldquo;Flynn&rdquo;&hellip;" autocomplete="off" />
+    <ul class="search-results" id="searchResults"></ul>
+  </div>
+</div>
+
+<!-- ============================== BOOK PREVIEW MODAL ============================== -->
+<div class="book-modal" id="bookModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle" hidden>
+  <div class="book-modal-backdrop" id="modalBackdrop"></div>
+  <div class="book-modal-panel">
+    <button class="modal-close" id="modalClose" type="button" aria-label="Close preview">&times;</button>
+    <div class="modal-cover" id="modalCover"></div>
+    <div class="modal-body">
+      <p class="modal-genre" id="modalGenre"></p>
+      <h3 id="modalTitle"></h3>
+      <p class="modal-author" id="modalAuthor"></p>
+      <div class="book-rating" id="modalRating"></div>
+      <p class="modal-blurb" id="modalBlurb"></p>
+      <div class="modal-actions">
+        <span class="book-price" id="modalPrice"></span>
+        <button class="btn btn-outline" id="modalWishlistBtn" type="button">Add to Wishlist</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Hidden data source for the modal: one template per book, keyed by id -->
+<div id="bookData" hidden>
+  <template data-book-id="silent-patient">
+    <p>A woman stops speaking the night she's accused of killing her husband. Years later, a criminal psychotherapist becomes obsessed with making her talk — and with what her silence has been protecting.</p>
+  </template>
+  <template data-book-id="song-of-achilles">
+    <p>An exiled prince and the golden son of a sea goddess grow up together, then go to war together. Madeline Miller retells the Iliad as a love story, and it does not go easy on the reader.</p>
+  </template>
+  <template data-book-id="night-circus">
+    <p>Le Cirque des Rêves only opens after dark. Behind its striped tents, two young illusionists are bound to a competition neither of them chose — and neither may survive if it plays out as intended.</p>
+  </template>
+  <template data-book-id="gone-girl">
+    <p>On the morning of their fifth anniversary, Nick's wife disappears. Everyone assumes he did it — including, for a while, the reader.</p>
+  </template>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
